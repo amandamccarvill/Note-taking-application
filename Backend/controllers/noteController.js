@@ -34,7 +34,7 @@ const createNote = async (req, res) => {
 // Get all notes with user details
 const getNotes = async (req, res) => {
     try {
-        const notes = await Note.find().populate('user', 'name email'); // Fetch all notes for user
+        const notes = await Note.find({user: req.user.id}).populate('user', 'name email'); // Fetch all notes for user
         res.status(200).json(notes);
     } catch (error) {
         res.status(500).json({ error: 'Server error' });
